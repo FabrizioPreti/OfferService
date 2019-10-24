@@ -32,7 +32,7 @@ The price of the product is managed by calculating the discount percentage of th
  
 ### Automatic Currency update of exchange rates scheduled task 
 Through the Currency Service an external Rest service is called at the following url "https://api.exchangeratesapi.io/latest?base=GBP", which returns the exchange values of a series of currencies updated  based on the reference currency, which in the Offer Service is GBP. Once the data is received, it is manipulated to return the discounted prices based on the currency of each product. 
-A schedule takes care of updating the relative exchange rate values on the db in real time (actually it's set every 10 minutes).
+A schedule takes care of updating the relative exchange rate values on the db in real time (actually it's set every 5 minutes).
 
 ## Toolset
 	- Spring Boot (embedded Tomcat)
@@ -187,7 +187,7 @@ SUMMARY:
 }
 
 ---------- UPDATE OFFER ----------
- PUT http://localhost:8102/offerservice/v1/offers
+* PUT http://localhost:8102/offerservice/v1/offers
 
 	- JSON example without associated products :
 {
@@ -380,9 +380,10 @@ Exception: "Offer already exist."
 	
 Exception: "Offer is alredy expired."
 
-PUT http://localhost:8102/offerservice/v1/offers/offer
+* PUT http://localhost:8102/offerservice/v1/offers/offer
 
 - Delete an offer Expired (just send the same json twice )
+
 	{
        "offerId": "1-OFFER-cddf-48dd-9ed1-1b754129c0c2",
        "offerExpiringDate": "2019-10-31 11:00:00",
