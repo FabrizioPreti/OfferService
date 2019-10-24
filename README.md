@@ -532,4 +532,3 @@ Exception: "Product already exist"
 ---------- GET ALL CURRENCIES----------
 * GET http://localhost:8102/offerservice/v1/currency
 
-
