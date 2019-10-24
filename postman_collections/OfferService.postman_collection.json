@@ -1,0 +1,461 @@
+{
+	"info": {
+		"_postman_id": "929d7c32-62ee-4c50-bdef-3722a82f5783",
+		"name": "OfferService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get all offers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/offers/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"offers",
+						""
+					]
+				},
+				"description": "get all offers"
+			},
+			"response": []
+		},
+		{
+			"name": "get offer by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/offers/offer/1-OFFER-cddf-48dd-9ed1-1b754129c0c2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"offers",
+						"offer",
+						"1-OFFER-cddf-48dd-9ed1-1b754129c0c2"
+					]
+				},
+				"description": "get all offers"
+			},
+			"response": []
+		},
+		{
+			"name": "get offer by id bad Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/offers/offer/2-PROD-cddf-48dd-9ed1-1b754129c0c2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"offers",
+						"offer",
+						"2-PROD-cddf-48dd-9ed1-1b754129c0c2"
+					]
+				},
+				"description": "get all offers"
+			},
+			"response": []
+		},
+		{
+			"name": "create offer without products",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"offerId\": \"\",\r\n    \"offerExpiringDate\": \"2019-12-30 23:00:00\",\r\n    \"offerStartingDate\": \"2019-11-30 23:00:00\",\r\n    \"offerDiscountPercent\": 20,\r\n    \"offerDescription\": \"We want you!!! For this special offer!\",\r\n    \"productList\": [],\r\n    \"currency\": {\r\n        \"currencyId\": \"0-DEFAULT-CURR-GBP\"\r\n    },\r\n    \"expired\": false,\r\n    \"offerCurrencyDescription\": \"GBP\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/offers/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"offers",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create offer without products duplicate id",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"offerId\": \"1-OFFER-cddf-48dd-9ed1-1b754129c0c2\",\r\n    \"offerExpiringDate\": \"2019-12-30 23:00:00\",\r\n    \"offerStartingDate\": \"2019-11-30 23:00:00\",\r\n    \"offerDiscountPercent\": 20,\r\n    \"offerDescription\": \"We want you!!! For this special offer!\",\r\n    \"productList\": [],\r\n    \"currency\": {\r\n        \"currencyId\": \"0-DEFAULT-CURR-GBP\"\r\n    },\r\n    \"expired\": false,\r\n    \"offerCurrencyDescription\": \"GBP\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/offers/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"offers",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create offer with product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"offerId\": \"\",\r\n    \"offerExpiringDate\": \"2019-12-30 23:00:00\",\r\n    \"offerStartingDate\": \"2019-11-30 23:00:00\",\r\n    \"offerDiscountPercent\": 20,\r\n    \"offerDescription\": \"Have a sip!\",\r\n    \"productList\": [\r\n    \t\t{\r\n    \t\t\"productId\":\"4-PROD-cddf-48dd-9ed1-1b754129c0c4\",\r\n    \t\t\"productName\":\"Barbera\",\r\n    \t\t\"productDescription\":\"Red wine\",\r\n    \t\t\"productPrice\":25,\r\n    \t\t\"isActive\": true,\r\n    \t\t\"productDiscountedPrice\":0\r\n    \t\t}\r\n    \t],\r\n    \"currency\": {\r\n        \"currencyId\": \"0-DEFAULT-CURR-GBP\"\r\n    },\r\n    \"expired\": false,\r\n    \"offerCurrencyDescription\": \"GBP\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/offers/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"offers",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create offer without products Expired",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"offerId\": \"\",\r\n    \"offerExpiringDate\": \"2019-10-15 23:00:00\",\r\n    \"offerStartingDate\": \"2019-10-10 23:00:00\",\r\n    \"offerDiscountPercent\": 20,\r\n    \"offerDescription\": \"We want you!!! For this special offer!\",\r\n    \"productList\": [],\r\n    \"currency\": {\r\n        \"currencyId\": \"0-DEFAULT-CURR-GBP\"\r\n    },\r\n    \"expired\": false,\r\n    \"offerCurrencyDescription\": \"GBP\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/offers/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"offers",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create offer without products dates inverted",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"offerId\": \"\",\r\n    \"offerExpiringDate\": \"2019-11-30 23:00:00\",\r\n    \"offerStartingDate\": \"2019-12-30 23:00:00\",\r\n    \"offerDiscountPercent\": 20,\r\n    \"offerDescription\": \"We want you!!! For this special offer!\",\r\n    \"productList\": [],\r\n    \"currency\": {\r\n        \"currencyId\": \"0-DEFAULT-CURR-GBP\"\r\n    },\r\n    \"expired\": false,\r\n    \"offerCurrencyDescription\": \"GBP\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/offers/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"offers",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update offer without products",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"offerId\": \"2-OFFER-cddf-48dd-9ed1-1b754129c0c3\",\r\n    \"offerExpiringDate\": \"2019-10-31 11:00:00\",\r\n    \"offerStartingDate\": \"2019-10-29 11:00:00\",\r\n    \"offerDiscountPercent\": 50,\r\n    \"offerDescription\": \"Hot Deal but only if you have the money\",\r\n    \"productList\": [],\r\n    \"currency\": {\r\n        \"currencyId\": \"2-CURR-cdcf-48dd-6hd1-1b754129c0c2\",\r\n        \"currencyDescription\": null,\r\n        \"currencyRate\": null\r\n    },\r\n    \"offerCurrencyDescription\": \"CAD\",\r\n    \"expired\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/offers/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"offers",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update offer without products Expired",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"offerId\": \"2-OFFER-cddf-48dd-9ed1-1b754129c0c3\",\r\n    \"offerExpiringDate\": \"2019-10-31 11:00:00\",\r\n    \"offerStartingDate\": \"2019-10-29 11:00:00\",\r\n    \"offerDiscountPercent\": 50,\r\n    \"offerDescription\": \"Hot Deal but only if you have the money\",\r\n    \"productList\": [],\r\n    \"currency\": {\r\n        \"currencyId\": \"2-CURR-cdcf-48dd-6hd1-1b754129c0c2\",\r\n        \"currencyDescription\": null,\r\n        \"currencyRate\": null\r\n    },\r\n    \"offerCurrencyDescription\": \"CAD\",\r\n    \"expired\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/offers/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"offers",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update offer with products",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"offerId\": \"1-OFFER-cddf-48dd-9ed1-1b754129c0c2\",\r\n        \"offerExpiringDate\": \"2019-10-31 11:00:00\",\r\n        \"offerStartingDate\": \"2019-10-29 11:00:00\",\r\n        \"offerDiscountPercent\": 10,\r\n        \"offerDescription\": \"Happy Friday To EvreyBody\",\r\n        \"productList\": [\r\n            {\r\n                \"productId\": \"2-PROD-cddf-48dd-9ed1-1b754129c0c2\",\r\n                \"productName\": \"Amarone\",\r\n                \"productDescription\": \"A special wine\",\r\n                \"productPrice\": 40.00,\r\n                \"offer\": {\r\n                    \"offerId\": \"1-OFFER-cddf-48dd-9ed1-1b754129c0c2\",\r\n                    \"offerExpiringDate\": null,\r\n                    \"offerStartingDate\": null,\r\n                    \"offerDiscountPercent\": null,\r\n                    \"offerDescription\": null,\r\n                    \"productList\": null,\r\n                    \"currency\": null,\r\n                    \"offerCurrencyDescription\": null,\r\n                    \"expired\": false\r\n                },\r\n                \"isActive\": true,\r\n                \"productDiscountedPrice\": 10.00\r\n            }\r\n        ],\r\n        \"currency\": {\r\n            \"currencyId\": \"1-CURR-cdcf-48dd-6hd1-1b754129c0c1\",\r\n            \"currencyDescription\": null,\r\n            \"currencyRate\": null\r\n        },\r\n        \"offerCurrencyDescription\": \"EUR\",\r\n        \"expired\": false\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/offers/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"offers",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete offer with products",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"offerId\": \"1-OFFER-cddf-48dd-9ed1-1b754129c0c2\",\r\n        \"offerExpiringDate\": \"2019-10-31 11:00:00\",\r\n        \"offerStartingDate\": \"2019-10-29 11:00:00\",\r\n        \"offerDiscountPercent\": 10,\r\n        \"offerDescription\": \"Happy Friday To EvreyBody\",\r\n        \"productList\": [\r\n            {\r\n                \"productId\": \"2-PROD-cddf-48dd-9ed1-1b754129c0c2\",\r\n                \"productName\": \"Amarone\",\r\n                \"productDescription\": \"A special wine\",\r\n                \"productPrice\": 40.00,\r\n                \"offer\": {\r\n                    \"offerId\": \"1-OFFER-cddf-48dd-9ed1-1b754129c0c2\",\r\n                    \"offerExpiringDate\": null,\r\n                    \"offerStartingDate\": null,\r\n                    \"offerDiscountPercent\": null,\r\n                    \"offerDescription\": null,\r\n                    \"productList\": null,\r\n                    \"currency\": null,\r\n                    \"offerCurrencyDescription\": null,\r\n                    \"expired\": false\r\n                },\r\n                \"isActive\": true,\r\n                \"productDiscountedPrice\": 10.00\r\n            }\r\n        ],\r\n        \"currency\": {\r\n            \"currencyId\": \"1-CURR-cdcf-48dd-6hd1-1b754129c0c1\",\r\n            \"currencyDescription\": null,\r\n            \"currencyRate\": null\r\n        },\r\n        \"offerCurrencyDescription\": \"EUR\",\r\n        \"expired\": false\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/offers/offer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"offers",
+						"offer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete without products",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"offerId\": \"3-OFFER-cddf-48dd-9ed1-1b754129c0c4\",\r\n        \"offerExpiringDate\": \"2019-10-31 11:00:00\",\r\n        \"offerStartingDate\": \"2019-10-29 11:00:00\",\r\n        \"offerDiscountPercent\": 25,\r\n        \"offerDescription\": \"Autumn Sale\",\r\n        \"productList\": [],\r\n        \"currency\": {\r\n            \"currencyId\": \"3-CURR-cdcf-48dd-6hd1-1b754129c0c3\",\r\n            \"currencyDescription\": null,\r\n            \"currencyRate\": null\r\n        },\r\n        \"offerCurrencyDescription\": \"USD\",\r\n        \"expired\": false\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/offers/offer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"offers",
+						"offer"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

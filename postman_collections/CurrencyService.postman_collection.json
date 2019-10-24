@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "3261a3d7-6731-4dea-aa1e-70c12869b3ec",
+		"name": "CurrencyService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://api.exchangeratesapi.io/latest?base=GBP",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.exchangeratesapi.io/latest?base=GBP",
+					"protocol": "https",
+					"host": [
+						"api",
+						"exchangeratesapi",
+						"io"
+					],
+					"path": [
+						"latest"
+					],
+					"query": [
+						{
+							"key": "base",
+							"value": "GBP"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all currencies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/currency/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"currency",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

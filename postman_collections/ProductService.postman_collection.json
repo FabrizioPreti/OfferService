@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "25c1ce9c-1dac-4ba7-b109-68938b1978d6",
+		"name": "ProductService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get all products",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get product by Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/products/product/3-PROD-cddf-48dd-9ed1-1b754129c0c3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"products",
+						"product",
+						"3-PROD-cddf-48dd-9ed1-1b754129c0c3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"productId\":\"\",\r\n\t\"productName\":\"Greco di Tufo\",\r\n\t\"productDescription\":\"White wine\",\r\n\t\"productPrice\":9,\r\n\t\"offer\":{\"offerId\":\"1-OFFER-cddf-48dd-9ed1-1b754129c0c2\"},\r\n\t\"isActive\": true,\r\n\t\"productDiscountedPrice\":0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create product without existing offer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"productId\":\"\",\r\n\t\"productName\":\"Greco di Tufo\",\r\n\t\"productDescription\":\"White wine\",\r\n\t\"productPrice\":9,\r\n\t\"offer\":{\"offerId\":\"\"},\r\n\t\"isActive\": true,\r\n    \"productDiscountedPrice\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update product",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"1-PROD-cddf-48cd-9ed1-1b754129c0c1\",\r\n    \"productName\": \"Chianti\",\r\n    \"productDescription\": \"Red wine to enjoy yor meals\",\r\n    \"productPrice\": 25.00,\r\n    \"offer\": {\r\n        \"offerId\": \"0-DEFAULT-OFFER\",\r\n        \"offerExpiringDate\": null,\r\n        \"offerStartingDate\": null,\r\n        \"offerDiscountPercent\": null,\r\n        \"offerDescription\": null,\r\n        \"productList\": null,\r\n        \"currency\": null,\r\n        \"offerCurrencyDescription\": null,\r\n        \"expired\": false\r\n    },\r\n    \"isActive\": true,\r\n    \"productDiscountedPrice\": 6.25\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete product",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"1-PROD-cddf-48cd-9ed1-1b754129c0c1\",\r\n    \"productName\": \"Brunello\",\r\n    \"productDescription\": \"Red wine to enjoy yor meals\",\r\n    \"productPrice\": 25.00,\r\n    \"offer\": {\r\n        \"offerId\": \"0-DEFAULT-OFFER\",\r\n        \"offerExpiringDate\": null,\r\n        \"offerStartingDate\": null,\r\n        \"offerDiscountPercent\": null,\r\n        \"offerDescription\": null,\r\n        \"productList\": null,\r\n        \"currency\": null,\r\n        \"offerCurrencyDescription\": null,\r\n        \"expired\": false\r\n    },\r\n    \"isActive\": true,\r\n    \"productDiscountedPrice\": 6.25\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8102/offerservice/v1/products/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"offerservice",
+						"v1",
+						"products",
+						"product"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
