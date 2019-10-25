@@ -15,9 +15,9 @@ The manage of the unique identifier (UID) has been managed through the generatio
 
 ##### Offer Endpoints:
 * endpoint for creating a new simple offer, with or without products association and with existing currency or associated with an "empty" default currency.
-* endpoint for modify and/or cancel offer, before an offer has expired.
+* endpoint for modify and or cancel offer, before an offer has expired.
 * endpoint for consult one or all existing offers, both expired and not expired.
-* endpoint for manually expire an Offer (update and/or logical delete, before an offer has expired).
+* endpoint for manually expire an Offer (update and or logical delete, before an offer has expired).
 * before an offer has expired  "merchant" may cancel or modify it, after that it is no longer possible.
 
 ##### Product Endpoints:
@@ -29,11 +29,11 @@ The manage of the unique identifier (UID) has been managed through the generatio
 
 ### Automatic Offer Expiration to update expired offers
 The automatic offers expiration is managed at the application start, when the http get methods are called for the first time.
-Also I have implemented  an automatic update to set as expired all the offers that are meant to be  on the db.(actually it's set every 6 minutes).
-Actually the cron that should be implemented in a real situation, for simplicity is commented.(supposed to start every day at 12:30 pm)
+Also I have implemented  an automatic update to set as expired all the offers that are meant to be on the db. (actually it's set every 6 minutes).
+Actually the cron that should be implemented in a real situation, for simplicity is commented. (supposed to start every day at 12:30 pm)
 
 ### Automatic discount product price associeted with currency 
-The price of the product is managed by calculating the discount percentage of the associated offer and in relation to its reference currency. The final calculation is visible in the product discounted price
+The price of the product is managed by calculating the discount percentage of the associated offer and in relation to its reference currency. The final calculation is visible in the product discounted price.
  
 ### Automatic Currency update of exchange rates scheduled task 
 Through the Currency Service an external Rest service is called at the following url "https://api.exchangeratesapi.io/latest?base=GBP", which returns the exchange values of a series of currencies updated  based on the reference currency, which in the Offer Service is GBP. Once the data is received, it is manipulated to return the discounted prices based on the currency of each product. 

@@ -22,7 +22,7 @@ public class ScheduledConfiguration {
 	private CurrencyOfferService currencyOfferService;
 	
 	@Autowired
-    private OfferService offerService;
+	private OfferService offerService;
 
 	@Scheduled(fixedRate = 300000)//(cron = "0 0/25 0,1 * * *")  should be implemented this in real situation
 	public void scheduledUpdateTask() {
@@ -32,7 +32,7 @@ public class ScheduledConfiguration {
 	}
 	@Scheduled(fixedRate = 360000)//(cron = "0 0/30 0,1 * * *") should be implemented this in real situation
 	public void scheduledExpireOfferUpdateTask() {
-		log.info(Thread.currentThread().getName() + " The currency offerScheduledUpdateExpire executed at "+ new Date());
+		log.info(Thread.currentThread().getName() + " The offer offerScheduledUpdateExpire executed at "+ new Date());
 
 		offerService.offerScheduledUpdateExpire();
 	}

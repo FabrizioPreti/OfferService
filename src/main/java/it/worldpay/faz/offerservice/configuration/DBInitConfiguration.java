@@ -101,12 +101,9 @@ public class DBInitConfiguration implements ApplicationRunner {
 		
 		listCurrencyOffer.add(new CurrencyOffer("0-DEFAULT-CURR-GBP", "GBP", new BigDecimal(1.0))); 
 													
-		listCurrencyOffer.add(new CurrencyOffer("1-CURR-cdcf-48dd-6hd1-1b754129c0c1", "EUR", 
-													new BigDecimal(1.16)));
-		listCurrencyOffer.add(new CurrencyOffer("2-CURR-cdcf-48dd-6hd1-1b754129c0c2", "CAD", 
-													new BigDecimal(1.70)));
-		listCurrencyOffer.add(new CurrencyOffer("3-CURR-cdcf-48dd-6hd1-1b754129c0c3", "USD", 
-													new BigDecimal(1.30)));
+		listCurrencyOffer.add(new CurrencyOffer("1-CURR-cdcf-48dd-6hd1-1b754129c0c1", "EUR", new BigDecimal(1.16)));
+		listCurrencyOffer.add(new CurrencyOffer("2-CURR-cdcf-48dd-6hd1-1b754129c0c2", "CAD", new BigDecimal(1.70)));
+		listCurrencyOffer.add(new CurrencyOffer("3-CURR-cdcf-48dd-6hd1-1b754129c0c3", "USD", new BigDecimal(1.30)));
 		
 		currencyOfferRepository.saveAll(listCurrencyOffer);
 	}

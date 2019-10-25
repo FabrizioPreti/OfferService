@@ -9,9 +9,13 @@ import it.worldpay.faz.offerservice.exception.ResourceNotFoundException;
 public interface ProductService {
 	
 	public List<ProductDTO> getAllProducts() throws ResourceNotFoundException;
+	
 	public ProductDTO getProductById(String productId) throws ResourceNotFoundException;
+	
 	public void createProduct(ProductDTO productDTO) throws DuplicateResourceException, Exception;
+	
 	public ProductDTO updateProduct(ProductDTO productDTO) throws Exception;
+	
 	public void deleteProduct(ProductDTO productDTO) throws Exception;
 
 }
