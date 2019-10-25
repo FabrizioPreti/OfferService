@@ -44,8 +44,9 @@ public class CurrencyOfferDTO {
 
 	@Override
 	public String toString() {
-		return "CurrencyOfferDTO [currencyId = " + currencyId + ", currencyDescription = " + currencyDescription
-				+ ", currencyRate = " + currencyRate.toString();
+		return "CurrencyOfferDTO [currencyId=" + currencyId + ", currencyDescription=" + currencyDescription
+				+ ", currencyRate=" + currencyRate + "]";
 	}
+
 
 }

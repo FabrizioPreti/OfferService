@@ -62,7 +62,6 @@ Actually the cron that should be implemented in a real situation, for simplicity
 ## Quick start
 #### Use the following command:
 	- `git clone - https://github.com/FabrizioPreti/OfferService.git`.
-	- `cd /offerservice`.
 	- `mvn clean install`.
 	- the embedded Tomcat starts at `http://localhost:8102`
 	- H2 DB console is available on `http://localhost:8102/offerservice/h2/`. 
@@ -329,7 +328,7 @@ Exception: "Offer not found."
    "offerCurrencyDescription": "GBP"
 }`
 
-Exception: "Attention the offer dates result already expired."
+Exception: "Offer already expired."
 
 ###### Create an offer with date malformed:
 	
@@ -373,8 +372,8 @@ Exception: "Offer already exist."
 		
 `{
    "offerId": "2-OFFER-cddf-48dd-9ed1-1b754129c0c3",
-   "offerExpiringDate": "2019-10-31 11:00:00",
-   "offerStartingDate": "2019-10-29 11:00:00",
+   "offerExpiringDate": "2019-10-23 11:00:00",
+   "offerStartingDate": "2019-10-20 11:00:00",
    "offerDiscountPercent": 50,
    "offerDescription": "Hot Deal but only if you have the money",
    "productList": [],
@@ -384,7 +383,7 @@ Exception: "Offer already exist."
        "currencyRate": null
    },
    "offerCurrencyDescription": "CAD",
-   "expired": true
+   "expired": false
 }`
 	
 Exception: "Offer is alredy expired."

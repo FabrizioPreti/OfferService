@@ -88,8 +88,13 @@ public class DBInitConfiguration implements ApplicationRunner {
 							"Hot Deal", false, new ArrayList<Product>(), 
 							new CurrencyOffer("2-CURR-cdcf-48dd-6hd1-1b754129c0c2"), "CAD"));
 		
-		listOffers.add(new Offer("3-OFFER-cddf-48dd-9ed1-1b754129c0c4", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2019-10-24 11:00:00"), 
-							new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2019-10-23 11:00:00"), 25, 
+		listOffers.add(new Offer("3-OFFER-cddf-48dd-9ed1-1b754129c0c4", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2019-10-31 11:00:00"), 
+							new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2019-10-29 11:00:00"), 25, 
+							"Autumn Sale", false, new ArrayList<Product>(), 
+							new CurrencyOffer("3-CURR-cdcf-48dd-6hd1-1b754129c0c3"), "USD"));
+		
+		listOffers.add(new Offer("4-OFFER-cddf-48dd-9ed1-1b754129c0c5", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2019-10-29 11:00:00"), 
+							new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2019-10-25 11:00:00"), 25, 
 							"Autumn Sale", false, new ArrayList<Product>(), 
 							new CurrencyOffer("3-CURR-cdcf-48dd-6hd1-1b754129c0c3"), "USD"));
 		

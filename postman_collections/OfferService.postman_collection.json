@@ -318,7 +318,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"offerId\": \"2-OFFER-cddf-48dd-9ed1-1b754129c0c3\",\r\n    \"offerExpiringDate\": \"2019-10-31 11:00:00\",\r\n    \"offerStartingDate\": \"2019-10-29 11:00:00\",\r\n    \"offerDiscountPercent\": 50,\r\n    \"offerDescription\": \"Hot Deal but only if you have the money\",\r\n    \"productList\": [],\r\n    \"currency\": {\r\n        \"currencyId\": \"2-CURR-cdcf-48dd-6hd1-1b754129c0c2\",\r\n        \"currencyDescription\": null,\r\n        \"currencyRate\": null\r\n    },\r\n    \"offerCurrencyDescription\": \"CAD\",\r\n    \"expired\": true\r\n}",
+					"raw": "{\r\n    \"offerId\": \"2-OFFER-cddf-48dd-9ed1-1b754129c0c3\",\r\n    \"offerExpiringDate\": \"2019-10-23 11:00:00\",\r\n    \"offerStartingDate\": \"2019-10-20 11:00:00\",\r\n    \"offerDiscountPercent\": 50,\r\n    \"offerDescription\": \"Hot Deal but only if you have the money\",\r\n    \"productList\": [],\r\n    \"currency\": {\r\n        \"currencyId\": \"2-CURR-cdcf-48dd-6hd1-1b754129c0c2\",\r\n        \"currencyDescription\": null,\r\n        \"currencyRate\": null\r\n    },\r\n    \"offerCurrencyDescription\": \"CAD\",\r\n    \"expired\": true\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
