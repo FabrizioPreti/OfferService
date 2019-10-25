@@ -46,8 +46,8 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductDTO> getAllProducts() throws ResourceNotFoundException {
 		log.info("getAllProducts()");
 		
-		List<ProductDTO> listProductDTO = ProductMapper.mapListFromModelToDTO(productRepository.findAll().stream()
-																.collect(Collectors.toList()));
+		List<ProductDTO> listProductDTO = ProductMapper
+				.mapListFromModelToDTO(productRepository.findAll().stream().collect(Collectors.toList()));
 
 		if(listProductDTO.size() == 0) {
 			throw new ResourceNotFoundException("List is empty");
@@ -61,9 +61,10 @@ public class ProductServiceImpl implements ProductService {
 		String id = productId != null && !productId.equals("") ? productId : "id null";
 		log.info("getProductById() {productId} = " + id);
 		
-		ProductDTO productDTO = ProductMapper.fromModelToDTO(Optional
-									   .ofNullable(productRepository.findByUUID(productId))
-									   .orElseThrow(() -> new ResourceNotFoundException("Product not found")));
+		ProductDTO productDTO = ProductMapper
+				.fromModelToDTO(Optional.ofNullable(productRepository.findByUUID(productId))
+						.orElseThrow(() -> new ResourceNotFoundException("Product not found")));
+		
 		return productDTO;
 	}
 

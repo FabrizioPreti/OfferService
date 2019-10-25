@@ -49,9 +49,8 @@ public class CurrencyOfferServiceImpl implements CurrencyOfferService {
 		String id = uuid != null && !uuid.equals("") ? uuid : "id null";
 		log.info("findCurrencyById() {String uuid} = " + id);
 			
-		Optional<CurrencyOfferDTO> currencyOfferDTO = Optional.ofNullable(CurrencyOfferMapper
-																	.fromModelToDTO(currencyOfferRepository
-                													.findByUUID(uuid)));
+		Optional<CurrencyOfferDTO> currencyOfferDTO = 
+				Optional.ofNullable(CurrencyOfferMapper.fromModelToDTO(currencyOfferRepository.findByUUID(uuid)));
 		
 		if(!currencyOfferDTO.isPresent()) {
 			throw new ResourceNotFoundException("Currency not found");

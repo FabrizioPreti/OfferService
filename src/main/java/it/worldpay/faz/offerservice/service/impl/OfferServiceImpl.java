@@ -21,6 +21,7 @@ import it.worldpay.faz.offerservice.exception.DuplicateResourceException;
 import it.worldpay.faz.offerservice.exception.OfferDatesException;
 import it.worldpay.faz.offerservice.exception.OfferExpiredException;
 import it.worldpay.faz.offerservice.exception.ResourceNotFoundException;
+import it.worldpay.faz.offerservice.exception.ServerNotAvailableException;
 import it.worldpay.faz.offerservice.model.Offer;
 import it.worldpay.faz.offerservice.repository.OfferRepository;
 import it.worldpay.faz.offerservice.service.OfferService;
@@ -89,14 +90,16 @@ public class OfferServiceImpl implements OfferService {
 		checkTodayisAfterEnd(offerDTO);
 		
 		List<ProductDTO> listProductTOfferDTO = offerDTO.getProductList().stream()
-												.map(p -> new ProductDTO(p.getProductId(),
-														p.getProductName(),
-														p.getProductDescription(),
-														p.getProductPrice(),
-														new OfferDTO(offerDTO.getOfferId()),
-														p.getIsActive(),
-														p.getProductDiscountedPrice()))
-												.collect(Collectors.toList());
+				.map(p -> new ProductDTO(
+						p.getProductId(),
+						p.getProductName(),
+						p.getProductDescription(),
+						p.getProductPrice(),
+						new OfferDTO(offerDTO.getOfferId()),
+						p.getIsActive(),
+						p.getProductDiscountedPrice()))
+				.collect(Collectors.toList());
+		
 		offerDTO.setProductList(listProductTOfferDTO);
 		
 		Offer offer = OfferMapper.toModelFromDTO(offerDTO);
@@ -135,6 +138,20 @@ public class OfferServiceImpl implements OfferService {
 		
 		offerRepository.save(offer);
 	}
+	
+	@Override
+    @Transactional
+    public void offerScheduledUpdateExpire() throws ServerNotAvailableException {
+        log.info("offerScheduledUpdateExpire()");
+        
+        List<OfferDTO> listMustExpireOffers = OfferMapper.mapListFromModelToDTO(offerRepository.findAllMustExpireOffers());
+        log.info("listMustExpireOffers.size() = " + listMustExpireOffers.size());
+        
+        for (OfferDTO offerDTO : listMustExpireOffers) {
+            autoExipire(offerDTO, offerRepository);
+        }
+        
+    }
 
 	private void checkIfOfferExpired(OfferDTO offerDTO, OfferRepository offerRepository
 			) throws OfferExpiredException {

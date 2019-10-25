@@ -10,6 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import it.worldpay.faz.offerservice.service.CurrencyOfferService;
+import it.worldpay.faz.offerservice.service.OfferService;
 
 @Configuration
 @EnableScheduling
@@ -20,10 +21,19 @@ public class ScheduledConfiguration {
 	@Autowired
 	private CurrencyOfferService currencyOfferService;
 	
-   @Scheduled(fixedRate = 30000)
-    public void scheduledUpdateTask() {
-    	log.info(Thread.currentThread().getName() + " The currency scheduledUpdateTask executed at "+ new Date());
-    	
-        currencyOfferService.currencyScheduledUpdate();
-    }
+	@Autowired
+    private OfferService offerService;
+
+	@Scheduled(fixedRate = 300000)//(cron = "0 0/25 0,1 * * *")  should be implemented this in real situation
+	public void scheduledUpdateTask() {
+		log.info(Thread.currentThread().getName() + " The currency scheduledUpdateTask executed at "+ new Date());
+
+		currencyOfferService.currencyScheduledUpdate();
+	}
+	@Scheduled(fixedRate = 360000)//(cron = "0 0/30 0,1 * * *") should be implemented this in real situation
+	public void scheduledExpireOfferUpdateTask() {
+		log.info(Thread.currentThread().getName() + " The currency offerScheduledUpdateExpire executed at "+ new Date());
+
+		offerService.offerScheduledUpdateExpire();
+	}
 }
