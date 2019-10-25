@@ -469,7 +469,7 @@ SUMMARY:
     "productName":"Greco di Tufo",
     "productDescription":"White wine",
     "productPrice":9,
-    "offer":{"offerId":""},
+    "offer":{"offerId":"0-DEFAULT-OFFER"},
     "isActive": true,
    "productDiscountedPrice": 0
 }`
