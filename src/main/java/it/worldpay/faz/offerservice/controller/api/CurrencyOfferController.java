@@ -1,5 +1,7 @@
 package it.worldpay.faz.offerservice.controller.api;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,15 +17,18 @@ import it.worldpay.faz.offerservice.utility.Paths;
 @RestController
 public class CurrencyOfferController {
 	
+	private static final Logger log = LoggerFactory.getLogger(CurrencyOfferController.class);
+	
 	@Autowired
 	private CurrencyOfferService currencyOfferService;
 	
 	@GetMapping(path = Paths.V1_CURRENCIES)
 	public ResponseEntity<BaseCurrencyDTO> getAllCurrency() throws ServerNotAvailableException{
 		
-		BaseCurrencyDTO listCurrency = currencyOfferService.getAllCurrencyFromAPI();
+		BaseCurrencyDTO allCurrency = currencyOfferService.getAllCurrencyFromAPI();
 
-		return ResponseEntity.ok(listCurrency);		
+		log.info("getAllCurrency().size() {}", allCurrency.toString());
+		return ResponseEntity.ok(allCurrency);		
 	}
 
 }

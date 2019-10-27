@@ -2,6 +2,10 @@ package it.worldpay.faz.offerservice.dto;
 
 import java.math.BigDecimal;
 
+/**
+ * @author FPreti
+ *
+ */
 public class CurrencyOfferDTO {
 	
 	private String currencyId;

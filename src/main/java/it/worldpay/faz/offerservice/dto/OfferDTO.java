@@ -3,6 +3,10 @@ package it.worldpay.faz.offerservice.dto;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author FPreti
+ *
+ */
 public class OfferDTO {
 	
 	private String offerId;

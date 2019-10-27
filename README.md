@@ -11,13 +11,16 @@ You are required to create a simple RESTful software service that will:
 
 ## Implemented requirements: 
 ### Endpoints
-The manage of the unique identifier (UID) has been managed through the generation of a random id (UUID). So, at the time of creation then the id field is empty.
+The manage of the unique identifier (UUID) has been managed through the generation of a random id (UUID). So, at the time of creation then the id field is empty.
+The id generetion is been implemented using UUID.randomUUID().toString() to ensure uniqueness and to avoid the hard coding into jsons, during tests, of fake id 
+not genereted by the back-end. This choise is due to the use of h2 embedded db that doesn't allow both Hibernate strategies like AUTO or IDENTITY and properties mapping to manage pk fk reletions.
+This well documented problem is easily avoided by using a fully fledge RDBMS.
 
 ##### Offer Endpoints:
 * endpoint for creating a new simple offer, with or without products association and with existing currency or associated with an "empty" default currency.
-* endpoint for modify and or cancel offer, before an offer has expired.
+* endpoint for modify and/or cancel offer, before an offer has expired.
 * endpoint for consult one or all existing offers, both expired and not expired.
-* endpoint for manually expire an Offer (update and or logical delete, before an offer has expired).
+* endpoint for manually expire an Offer (update and/or logical delete, before an offer has expired).
 * before an offer has expired  "merchant" may cancel or modify it, after that it is no longer possible.
 
 ##### Product Endpoints:
@@ -145,8 +148,9 @@ SUMMARY:
 * POST http://localhost:8102/offerservice/v1/offers
 
 ###### JSON example without associated products :
-		
-`{
+
+````		
+{
    "offerId": "",
    "offerExpiringDate": "2019-12-30 23:00:00",
    "offerStartingDate": "2019-11-30 23:00:00",
@@ -158,11 +162,13 @@ SUMMARY:
    },
    "expired": false,
    "offerCurrencyDescription": "GBP"
-}`
+}
+````
 
 ###### JSON example with associated products :
-		
-`{
+	
+````	
+{
    "offerId": "",
    "offerExpiringDate": "2019-12-30 23:00:00",
    "offerStartingDate": "2019-11-30 23:00:00",
@@ -183,14 +189,16 @@ SUMMARY:
    },
    "expired": false,
    "offerCurrencyDescription": "GBP"
-}`
+}
+````
 
 #### UPDATE OFFER 
 * PUT http://localhost:8102/offerservice/v1/offers
 
 ###### JSON example without associated products :
 		
-`{
+````
+{
    "offerId": "2-OFFER-cddf-48dd-9ed1-1b754129c0c3",
    "offerExpiringDate": "2019-10-31 11:00:00",
    "offerStartingDate": "2019-10-29 11:00:00",
@@ -204,11 +212,13 @@ SUMMARY:
    },
    "offerCurrencyDescription": "CAD",
    "expired": false
-}`
+}
+````
 
 ###### JSON example with associated products :
 	
-`{
+````
+{
    "offerId": "1-OFFER-cddf-48dd-9ed1-1b754129c0c2",
    "offerExpiringDate": "2019-10-31 11:00:00",
    "offerStartingDate": "2019-10-29 11:00:00",
@@ -242,14 +252,16 @@ SUMMARY:
    },
    "offerCurrencyDescription": "EUR",
    "expired": false
-}`
+}
+````
 
 #### DELETE OFFER 
 * PUT http://localhost:8102/offerservice/v1/offers/offer
 
 ###### JSON example without associated products (just send the same json twice to confirm that the offer is expire):
 		
-`{
+````
+{
    "offerId": "3-OFFER-cddf-48dd-9ed1-1b754129c0c4",
    "offerExpiringDate": "2019-10-31 11:00:00",
    "offerStartingDate": "2019-10-29 11:00:00",
@@ -263,11 +275,13 @@ SUMMARY:
    },
    "offerCurrencyDescription": "USD",
    "expired": false
-}`
+}
+````
    
 ###### JSON example with associated products: (just send the same json twice to confirm that the offer is expire):
 		
-`{
+````
+{
    "offerId": "1-OFFER-cddf-48dd-9ed1-1b754129c0c2",
    "offerExpiringDate": "2019-10-31 11:00:00",
    "offerStartingDate": "2019-10-29 11:00:00",
@@ -301,7 +315,8 @@ SUMMARY:
    },
    "offerCurrencyDescription": "EUR",
    "expired": false
-}`
+}
+````
 
 #### OFFER EXCEPTION HANDLING 
 * GET http://localhost:8102/offerservice/v1/offers/offer/2-PROD-cddf-48dd-9ed1-1b754129c0c2
@@ -314,7 +329,8 @@ Exception: "Offer not found."
 
 ###### Create an offer Expired: 
 		
-`{
+````
+{
    "offerId": "",
    "offerExpiringDate": "2019-10-15 23:00:00",
    "offerStartingDate": "2019-10-10 23:00:00",
@@ -326,13 +342,15 @@ Exception: "Offer not found."
    },
    "expired": false,
    "offerCurrencyDescription": "GBP"
-}`
+}
+````
 
 Exception: "Offer already expired."
 
 ###### Create an offer with date malformed:
-	
-`{
+
+````
+{
    "offerId": "",
    "offerExpiringDate": "2019-11-30 23:00:00",
    "offerStartingDate": "2019-12-30 23:00:00",
@@ -344,13 +362,15 @@ Exception: "Offer already expired."
    },
    "expired": false,
    "offerCurrencyDescription": "GBP"
-}`
+}
+````
 
 Exception: "Expiring date must be after starting date."
 
 ###### Create a duplicate offer:
 	
-`{
+````
+{
    "offerId": "1-OFFER-cddf-48dd-9ed1-1b754129c0c2",
    "offerExpiringDate": "2019-12-30 23:00:00",
    "offerStartingDate": "2019-11-30 23:00:00",
@@ -362,7 +382,8 @@ Exception: "Expiring date must be after starting date."
    },
    "expired": false,
    "offerCurrencyDescription": "GBP"
-}`
+}
+````
 
 Exception: "Offer already exist."
 
@@ -370,7 +391,8 @@ Exception: "Offer already exist."
 
 ###### Update an offer Expired
 		
-`{
+````
+{
    "offerId": "2-OFFER-cddf-48dd-9ed1-1b754129c0c3",
    "offerExpiringDate": "2019-10-23 11:00:00",
    "offerStartingDate": "2019-10-20 11:00:00",
@@ -384,7 +406,8 @@ Exception: "Offer already exist."
    },
    "offerCurrencyDescription": "CAD",
    "expired": false
-}`
+}
+````
 	
 Exception: "Offer is alredy expired."
 
@@ -392,7 +415,8 @@ Exception: "Offer is alredy expired."
 
 ###### Delete an offer Expired (just send the same json twice )
 
-`{
+````
+{
    "offerId": "1-OFFER-cddf-48dd-9ed1-1b754129c0c2",
    "offerExpiringDate": "2019-10-31 11:00:00",
    "offerStartingDate": "2019-10-29 11:00:00",
@@ -426,7 +450,8 @@ Exception: "Offer is alredy expired."
    },
    "offerCurrencyDescription": "EUR",
    "expired": false
-}`
+}
+````
    
 Exception: "Offer is alredy expired."
    
@@ -451,7 +476,8 @@ SUMMARY:
 
 ###### JSON example with existing offer :
 		
-`{
+````
+{
     "productId":"",
     "productName":"Greco di Tufo",
     "productDescription":"White wine",
@@ -459,11 +485,13 @@ SUMMARY:
     "offer":{"offerId":"1-OFFER-cddf-48dd-9ed1-1b754129c0c2"},
     "isActive": true,
     "productDiscountedPrice":0
-}`
+}
+````
 
 ###### JSON example with existing default "empty" offer:(the default offer id with GBP currency will be assigned)
 	
-`{
+````
+{
     "productId":"",
     "productName":"Greco di Tufo",
     "productDescription":"White wine",
@@ -471,14 +499,16 @@ SUMMARY:
     "offer":{"offerId":"0-DEFAULT-OFFER"},
     "isActive": true,
    "productDiscountedPrice": 0
-}`
+}
+````
 
 #### UPDATE PRODUCT
 * PUT http://localhost:8102/offerservice/v1/products
 
 ###### JSON example with existing offer:
 		
-`{
+````
+{
    "productId": "1-PROD-cddf-48cd-9ed1-1b754129c0c1",
    "productName": "Chianti",
    "productDescription": "Red wine to enjoy yuor meals",
@@ -496,14 +526,16 @@ SUMMARY:
    },
    "isActive": true,
    "productDiscountedPrice": 6.25
-}`
+}
+````
 
 #### DELETE PRODUCT 
 * PUT http://localhost:8102/offerservice/v1/products/product (just send the same json twice and "isActive" become false )
 
 ###### JSON example with existing offer: 
 		
-`{
+````
+{
    "productId": "1-PROD-cddf-48cd-9ed1-1b754129c0c1",
    "productName": "Brunello",
    "productDescription": "Red wine to enjoy yuor meals",
@@ -521,14 +553,16 @@ SUMMARY:
    },
    "isActive": true,
    "productDiscountedPrice": 6.25
-}`
+}
+````
 	
 #### PRODUCT EXCEPTION HANDLING
 * POST http://localhost:8102/offerservice/v1/products
 
 ###### Create a duplicate product:
 	
-`{
+````
+{
     "productId":"1-PROD-cddf-48cd-9ed1-1b754129c0c1",
     "productName":"Greco di Tufo",
     "productDescription":"White wine",
@@ -536,7 +570,8 @@ SUMMARY:
     "offer":{"offerId":"1-OFFER-cddf-48dd-9ed1-1b754129c0c2"},
     "isActive": true,
     "productDiscountedPrice":0
-}`
+}
+````
 
 Exception: "Product already exist"
 

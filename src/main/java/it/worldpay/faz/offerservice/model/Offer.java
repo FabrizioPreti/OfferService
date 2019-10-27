@@ -13,6 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+/**
+ * @author FPreti
+ *
+ */
 @Entity(name="OFFER")
 public class Offer implements Serializable{
 

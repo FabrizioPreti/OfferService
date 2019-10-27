@@ -19,7 +19,5 @@ public class OfferExpiredException extends OfferServiceGenericException{
 		super(message);
 		errorCode(ErrorCodeEnum.EXPIRED_ERROR);
 	}
-	
-	
 
 }

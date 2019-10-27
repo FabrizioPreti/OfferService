@@ -26,13 +26,13 @@ public class ScheduledConfiguration {
 
 	@Scheduled(fixedRate = 300000)//(cron = "0 0/25 0,1 * * *")  should be implemented this in real situation
 	public void scheduledUpdateTask() {
-		log.info(Thread.currentThread().getName() + " The currency scheduledUpdateTask executed at "+ new Date());
+		log.info("####The currency scheduledUpdateTask executed at {}, {}",Thread.currentThread().getName(), new Date());
 
 		currencyOfferService.currencyScheduledUpdate();
 	}
 	@Scheduled(fixedRate = 360000)//(cron = "0 0/30 0,1 * * *") should be implemented this in real situation
 	public void scheduledExpireOfferUpdateTask() {
-		log.info(Thread.currentThread().getName() + " The offer offerScheduledUpdateExpire executed at "+ new Date());
+		log.info("####The offer offerScheduledUpdateExpire executed at {}, {}",Thread.currentThread().getName(), new Date());
 
 		offerService.offerScheduledUpdateExpire();
 	}

@@ -97,15 +97,14 @@ public class ProductControllerTest {
 	
 	@Test
 	public void delete_whenOfferIsValid_thenResponseIs204()throws Exception{
-		ProductDTO deletedDummyProductDTO = dummyProductDTO;
-		deletedDummyProductDTO.setIsActive(false);
+		dummyProductDTO.setIsActive(false);
 		
 		doNothing().when(productService).deleteProduct(dummyProductDTO);
 		mockMvc.perform(
-				get((Paths.V1_PRODUCTS_ID), deletedDummyProductDTO.getProductId())
+				put((Paths.V1_PRODUCTS_DELETE), dummyProductDTO.getProductId())
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsBytes(dummyProductDTO)))
-				.andExpect(status().isOk());
+				.andExpect(status().isNoContent());
 	}
 	
 	

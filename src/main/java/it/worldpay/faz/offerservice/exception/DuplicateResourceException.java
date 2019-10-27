@@ -20,7 +20,4 @@ public class DuplicateResourceException extends OfferServiceGenericException{
 		errorCode(ErrorCodeEnum.DUPLICATED_ERROR);
 	}
 	
-	
-	
-	
 }

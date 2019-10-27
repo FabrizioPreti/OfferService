@@ -34,6 +34,9 @@ public class CurrencyOfferServiceImpl implements CurrencyOfferService {
 	
 	@Autowired
 	private CurrencyOfferRepository currencyOfferRepository;
+	
+	@Autowired
+	private CurrencyOfferMapper currencyOfferMapper;
 
 
 	@Override
@@ -46,16 +49,15 @@ public class CurrencyOfferServiceImpl implements CurrencyOfferService {
 	
 	@Override
 	public CurrencyOfferDTO findCurrencyById(String uuid) throws ResourceNotFoundException {
-		String id = uuid != null && !uuid.equals("") ? uuid : "id null";
-		log.info("findCurrencyById() {String uuid} = " + id);
+		log.info("findCurrencyById() {} = ", uuid);
 			
 		Optional<CurrencyOfferDTO> currencyOfferDTO = 
-				Optional.ofNullable(CurrencyOfferMapper.fromModelToDTO(currencyOfferRepository.findByUUID(uuid)));
+				Optional.ofNullable(currencyOfferMapper.fromModelToDTO(currencyOfferRepository.findByUUID(uuid)));
 		
 		if(!currencyOfferDTO.isPresent()) {
 			throw new ResourceNotFoundException("Currency not found");
 		}
-		log.info("currencyDTO.toString = " + currencyOfferDTO.toString());
+		log.info("currencyDTO.toString = {}", currencyOfferDTO.toString());
 		return currencyOfferDTO.get();
 	}
 	

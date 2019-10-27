@@ -1,46 +1,42 @@
 package it.worldpay.faz.offerservice.dto.mapper;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import it.worldpay.faz.offerservice.dto.OfferDTO;
 import it.worldpay.faz.offerservice.dto.ProductDTO;
-import it.worldpay.faz.offerservice.model.Offer;
 import it.worldpay.faz.offerservice.model.Product;
 
-public class ProductMapper {
+/**
+ * @author FP
+ *
+ */
+public interface ProductMapper {
 	
-	public static ProductDTO fromModelToDTO(Product product) {
-		
-		return new ProductDTO(
-				product.getProductId(),
-				product.getProductName(),
-				product.getProductDescription(),
-				product.getProductPrice(),
-				new OfferDTO(product.getOffer().getOfferId()),
-				product.getIsActive(),
-				product.getProductDiscountedPrice()
-				);
-	}
+	/**
+	 * Maps from model to DTO
+	 * @param product
+	 * @return productDTO
+	 */
+	public ProductDTO fromModelToDTO(Product product);
 	
-	public static Product toModelFromDTO(ProductDTO productDTO) {
-		
-		return new Product(
-				productDTO.getProductId(),
-				productDTO.getProductName(),
-				productDTO.getProductDescription(),
-				productDTO.getProductPrice(),
-				new Offer(productDTO.getOffer().getOfferId()),
-				productDTO.getIsActive(),
-				productDTO.getProductDiscountedPrice()
-				);
-	}
+	/**
+	 * Maps from DTO to model
+	 * @param productDTO
+	 * @return product
+	 */
+	public Product toModelFromDTO(ProductDTO productDTO);
 	
-	public static List<ProductDTO> mapListFromModelToDTO(List<Product> listProduct){
-		return listProduct.stream().map(ProductMapper::fromModelToDTO).collect(Collectors.toList());
-	}
+	/**
+	 * Maps from list of model to list of DTO
+	 * @param listProduct
+	 * @return listProductDTO
+	 */
+	public List<ProductDTO> mapListFromModelToDTO(List<Product> listProduct);
 	
-	public static List<Product> mapListToModelFromDTO(List<ProductDTO> listProduct){
-		return listProduct.stream().map(ProductMapper::toModelFromDTO).collect(Collectors.toList());
-	}
+	/**
+	 * Maps from list of DTO to list of model
+	 * @param listProductDTO
+	 * @return listProduct
+	 */
+	public List<Product> mapListToModelFromDTO(List<ProductDTO> listProductDTO);
+
 }

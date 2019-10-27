@@ -15,11 +15,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import io.vavr.Tuple2;
 import it.worldpay.faz.offerservice.dto.OfferDTO;
+import it.worldpay.faz.offerservice.dto.mapper.OfferMapper;
+import it.worldpay.faz.offerservice.dto.mapper.impl.OfferMapperImpl;
 import it.worldpay.faz.offerservice.dummy.DummyFactoryImpl;
 import it.worldpay.faz.offerservice.exception.DuplicateResourceException;
 import it.worldpay.faz.offerservice.exception.OfferExpiredException;
@@ -37,6 +40,9 @@ public class OfferServiceImplTest {
 	
 	@Mock
 	private OfferRepository offerRepository;
+	
+	@Spy
+	private OfferMapper offerMapper = new OfferMapperImpl();
 	
 	private OfferDTO dummyOfferDTO;
 	private Offer dummyOffer;

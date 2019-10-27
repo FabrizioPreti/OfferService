@@ -1,58 +1,42 @@
 package it.worldpay.faz.offerservice.dto.mapper;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import it.worldpay.faz.offerservice.dto.CurrencyOfferDTO;
 import it.worldpay.faz.offerservice.dto.OfferDTO;
 import it.worldpay.faz.offerservice.model.Offer;
-import it.worldpay.faz.offerservice.model.Product;
 
-public class OfferMapper {
+/**
+ * @author FP
+ *
+ */
+public interface OfferMapper {
 	
-	public static OfferDTO fromModelToDTO(Offer offer) {
-		
-		return new OfferDTO(
-				offer.getOfferId(),
-				offer.getOfferExpiringDate(), 
-				offer.getOfferStartingDate(), 
-				offer.getOfferDiscountPercent(), 
-				offer.getOfferDescription(), 
-				offer.isExpired(), 
-				offer.getProductList().stream()
-					.map(product ->
-						ProductMapper.fromModelToDTO(product))
-					.collect(Collectors.toList()), 
-					new CurrencyOfferDTO(offer.getCurrency().getCurrencyId()),
-				offer.getOfferCurrencyDescription()
-				);
-	}
+	/**
+	 * Maps from model to DTO
+	 * @param offer
+	 * @return offerDTO
+	 */
+	public OfferDTO fromModelToDTO(Offer offer);
 	
-	public static Offer toModelFromDTO(OfferDTO offerDTO) {
-		
-		return new Offer(
-				offerDTO.getOfferId(),
-				offerDTO.getOfferExpiringDate(), 
-				offerDTO.getOfferStartingDate(), 
-				offerDTO.getOfferDiscountPercent(), 
-				offerDTO.getOfferDescription(), 
-				offerDTO.isExpired(), 
-				offerDTO.getProductList().stream()
-				  .map(productDTO -> {
-					  productDTO.setOffer(new OfferDTO(offerDTO.getOfferId()));
-					  Product product = ProductMapper.toModelFromDTO(productDTO);
-					  return product;
-				  }).collect(Collectors.toList()),
-				  CurrencyOfferMapper.toModelFromDTO(offerDTO.getCurrency()),
-				  offerDTO.getOfferCurrencyDescription()
-				);
-	}
+	/**
+	 * Maps from DTO to model
+	 * @param offerDTO
+	 * @return offer
+	 */
+	public Offer toModelFromDTO(OfferDTO offerDTO);
 
-	public static List<OfferDTO> mapListFromModelToDTO(List<Offer> listOffer){
-		return listOffer.stream().map(OfferMapper::fromModelToDTO).collect(Collectors.toList());
-	}
+	/**
+	 * Maps from list of model to list of DTO
+	 * @param listOffer
+	 * @return listOfferDTO
+	 */
+	public List<OfferDTO> mapListFromModelToDTO(List<Offer> listOffer);
 	
-	public static List<Offer> mapListToModelFromDTO(List<OfferDTO> listOffer){
-		return listOffer.stream().map(OfferMapper::toModelFromDTO).collect(Collectors.toList());
-	}
+	/**
+	 * Maps from list of DTO to list of model
+	 * @param listOfferDTO
+	 * @return listOffer
+	 */
+	public List<Offer> mapListToModelFromDTO(List<OfferDTO> listOfferDTO);
+	
 }

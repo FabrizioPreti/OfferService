@@ -12,12 +12,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import it.worldpay.faz.offerservice.dto.CurrencyOfferDTO;
 import it.worldpay.faz.offerservice.dto.OfferDTO;
 import it.worldpay.faz.offerservice.dto.ProductDTO;
+import it.worldpay.faz.offerservice.dto.mapper.ProductMapper;
+import it.worldpay.faz.offerservice.dto.mapper.impl.ProductMapperImpl;
 import it.worldpay.faz.offerservice.dummy.DummyFactoryImpl;
 import it.worldpay.faz.offerservice.exception.DuplicateResourceException;
 import it.worldpay.faz.offerservice.model.Product;
@@ -45,6 +48,9 @@ public class ProductServiceImplTest {
 	
 	@Mock
 	private CurrencyOfferServiceImpl currencyOfferService;
+	
+	@Spy
+	private ProductMapper productMapper = new ProductMapperImpl();
 	
 	private ProductDTO dummyProductDTO;
 	private Product dummyProduct;

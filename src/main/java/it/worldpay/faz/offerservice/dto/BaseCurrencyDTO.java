@@ -2,6 +2,10 @@ package it.worldpay.faz.offerservice.dto;
 
 import java.util.Date;
 
+/**
+ * @author FPreti
+ *
+ */
 public class BaseCurrencyDTO {
 	
 	private RatesDTO rates;

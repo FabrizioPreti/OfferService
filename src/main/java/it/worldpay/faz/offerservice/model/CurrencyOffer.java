@@ -7,6 +7,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+/**
+ * @author FPreti
+ *
+ */
 @Entity(name="CURRENCY")
 public class CurrencyOffer implements Serializable{
 	

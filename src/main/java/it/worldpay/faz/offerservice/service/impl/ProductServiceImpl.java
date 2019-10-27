@@ -42,11 +42,14 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private CurrencyOfferService currencyOfferService;
 	
+	@Autowired
+	private ProductMapper productMapper;
+	
 	@Override
 	public List<ProductDTO> getAllProducts() throws ResourceNotFoundException {
 		log.info("getAllProducts()");
 		
-		List<ProductDTO> listProductDTO = ProductMapper
+		List<ProductDTO> listProductDTO = productMapper
 				.mapListFromModelToDTO(productRepository.findAll().stream().collect(Collectors.toList()));
 
 		if(listProductDTO.size() == 0) {
@@ -58,10 +61,9 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public ProductDTO getProductById(String productId) throws ResourceNotFoundException {
-		String id = productId != null && !productId.equals("") ? productId : "id null";
-		log.info("getProductById() {productId} = " + id);
+		log.info("getProductById() {} = ", productId);
 		
-		ProductDTO productDTO = ProductMapper
+		ProductDTO productDTO = productMapper
 				.fromModelToDTO(Optional.ofNullable(productRepository.findByUUID(productId))
 						.orElseThrow(() -> new ResourceNotFoundException("Product not found")));
 		
@@ -71,8 +73,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	@Transactional
 	public void createProduct(ProductDTO productDTO) throws DuplicateResourceException, Exception {
-		ProductDTO dto = productDTO != null ? productDTO : new ProductDTO();
-		log.info("createProduct() {productDTO} = " + dto);
+		log.info("createProduct() {} = ", productDTO.toString());
 		
 		String idOffer = productDTO.getOffer() != null && !productDTO.getOffer().getOfferId().equals("") ? 
 													productDTO.getOffer().getOfferId() : UtilConstants.DEFAULT_OFFER_ID;
@@ -97,7 +98,14 @@ public class ProductServiceImpl implements ProductService {
 		productDTO.setOffer(offerDTO);
 		productDTO.setProductDiscountedPrice(productDicountedPrice);
 		
-		//generate id
+		/*
+		 * The id generetion is been implemented using UUID.randomUUID().toString()
+		 * to ensure uniqueness and to avoid the hard coding into jsons, during tests, of fake id 
+		 * not genereted by the back-end. 
+		 * This choise is due to the use of h2 embedded db that doesn't allow both Hibernate 
+		 * strategies like AUTO or IDENTITY and properties mapping to manage pk fk reletions.
+		 * This well documented problem is easily avoided by using a fully fledge RDBMS.
+		 */
 		if (productDTO.getProductId().equals("")) {
 			String uuid = UUID.randomUUID().toString();
 			productDTO.setProductId(uuid);
@@ -105,20 +113,19 @@ public class ProductServiceImpl implements ProductService {
 		
 		checkProductExist(productDTO);
 		
-		Product product = ProductMapper.toModelFromDTO(productDTO);
-		log.info("createProduct() {productDTO} = " + productDTO.toString());
+		Product product = productMapper.toModelFromDTO(productDTO);
+		log.info("createProduct() {} = ", productDTO.toString());
 		productRepository.save(product);
 	}
 
 	@Override
 	@Transactional
 	public ProductDTO updateProduct(ProductDTO productDTO) throws Exception {
-		ProductDTO dto = productDTO != null ? productDTO : new ProductDTO();
-		log.info("updateProduct() {productDTO}" + dto);
+		log.info("updateProduct() {}", productDTO.toString());
 		
-		Product product = ProductMapper.toModelFromDTO(productDTO);
+		Product product = productMapper.toModelFromDTO(productDTO);
 		
-		productDTO = ProductMapper.fromModelToDTO(productRepository.save(product));
+		productDTO = productMapper.fromModelToDTO(productRepository.save(product));
 		
 		return productDTO;
 
@@ -127,17 +134,16 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	@Transactional
 	public void deleteProduct(ProductDTO productDTO) throws Exception {
-		ProductDTO dto = productDTO != null ? productDTO : new ProductDTO();
-		log.info("deleteProduct() {productDTO}" + dto);
+		log.info("deleteProduct() {}", productDTO.toString());
 		
-		Product product = ProductMapper.toModelFromDTO(productDTO);
+		Product product = productMapper.toModelFromDTO(productDTO);
 		product.setIsActive(false);
 		
 		productRepository.save(product);
 	}
 	
 	private void checkProductExist(ProductDTO productDTO) throws DuplicateResourceException {
-		log.info("checkProductExist() {productDTO}");
+		log.info("checkProductExist()");
 		
 		Optional<Product> productExist = Optional.ofNullable(productRepository.findByUUID(productDTO.getProductId()));
 		if(productExist.isPresent()) {

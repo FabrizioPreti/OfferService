@@ -19,7 +19,5 @@ public class ResourceNotFoundException extends OfferServiceGenericException{
 		super(message);
 		errorCode(ErrorCodeEnum.NOT_FOUND_ERROR);
 	}
-	
-	
 
 }

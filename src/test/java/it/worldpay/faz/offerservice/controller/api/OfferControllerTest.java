@@ -97,15 +97,14 @@ public class OfferControllerTest {
 	
 	@Test
 	public void delete_whenOfferIsValid_thenResponseIs204()throws Exception{
-		OfferDTO deletedDummyOfferDTO = dummyOfferDTO;
-		deletedDummyOfferDTO.setExpired(true);
+		dummyOfferDTO.setExpired(true);
 		
 		doNothing().when(offerService).deleteOffer(dummyOfferDTO);
 		mockMvc.perform(
-				get((Paths.V1_OFFERS_ID), deletedDummyOfferDTO.getOfferId())
+				put((Paths.V1_OFFERS_DELETE), dummyOfferDTO.getOfferId())
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsBytes(dummyOfferDTO)))
-				.andExpect(status().isOk());
+				.andExpect(status().isNoContent());
 	}
 	
 	

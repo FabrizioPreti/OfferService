@@ -10,6 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+/**
+ * @author FPreti
+ *
+ */
 @Entity(name="PRODUCT")
 public class Product implements Serializable{
 	

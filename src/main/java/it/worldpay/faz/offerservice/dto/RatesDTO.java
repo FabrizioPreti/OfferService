@@ -1,5 +1,9 @@
 package it.worldpay.faz.offerservice.dto;
 
+/**
+ * @author FPreti
+ *
+ */
 public class RatesDTO {
 	
 	private String CAD;

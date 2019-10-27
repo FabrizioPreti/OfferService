@@ -19,8 +19,5 @@ public class ServerNotAvailableException extends OfferServiceGenericException {
 		super(message);
 		errorCode(ErrorCodeEnum.NOT_FOUND_ERROR);
 	}
-	
-	
-	
 
 }

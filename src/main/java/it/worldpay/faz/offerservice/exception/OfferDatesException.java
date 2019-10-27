@@ -19,7 +19,5 @@ public class OfferDatesException extends OfferServiceGenericException{
 		super(message);
 		errorCode(ErrorCodeEnum.DATE_ERROR);
 	}
-	
-	
 
 }
